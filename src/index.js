@@ -1,27 +1,37 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-class IncrementApp extends React.Component{  // Class type of Component
+
+function Message(props){
+  if(props.Value){
+    return <h1>This is the first message :D</h1>
+  }else{
+    return <h1>This is the Second message from Mehadi</h1>
+  }
+}
+
+class Switch_between_two_button extends React.Component{
   constructor(props){
     super(props);
-    this.state = {counter: 0}
-    this.increment = this.increment.bind(this)
+    this.state = {ck: true}
   }
 
-  increment(e){ // e means event
-    e.preventDefault(); // redirect prevention ..
+  btnClick = () => {
     this.setState({
-      counter: this.state.counter + 1
+      ck: !this.state.ck
     });
   }
 
   render(){
-    return <button href='https://google.com' onClick={this.increment}>Value is {this.state.counter}</button>
+    return <div>
+              <button onClick={this.btnClick}>Click to see message</button>
+              <Message Value={this.state.ck}/>
+            </div>
   }
 }
 
 
 ReactDOM.render(
-  <IncrementApp />,
+  <Switch_between_two_button />,
   document.getElementById('root')
 );
