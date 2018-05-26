@@ -1,58 +1,50 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-// class FormList extends React.Component{
-//   constructor(props){
-//     super(props);
-//     this.state = {value:'initial_value'}
-//   }
-//
-//   render(){
-//     return <form>
-//             <select></select>
-//            </form>
-//   }
-// }
-
-class UIPrintChart extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 'PNG'
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handlePrint = this.handlePrint.bind(this);
+class Calculator extends React.Component{
+  constructor(props){
+    super(props)
+    this.state = {scale: 'c', temp:0}
   }
 
-  handlePrint() {
-    if (this.state.value) {
-      console.log(this.state.value);
-    }
+  handleCelsius = (e) =>{
+    this.setState({
+      scale: 'c',
+      temp: e.target.value
+    })
   }
 
-  handleChange(e) {
-    this.setState({ value: e.target.value });
+  handleFahrenheit = (e) =>{
+    this.setState({
+      scale: 'f',
+      temp: e.target.value
+    })
   }
 
-  render() {
-    return (
+  render(){
+    const temp = this.state.temp
+    const scale = this.state.scale
+    const celsius = (scale == 'f') ? (temp-32)*5/9 : temp
+    const fahrenheit = (scale == 'c') ? (temp*9)/5 + 32 : temp
+
+    return(
       <div>
-        <select onChange={this.handleChange}>
-          <option value="PNG">PNG Image</option>
-          <option value="JPEG">JPEG Image</option>
-          <option value="PDF">PDF Document</option>
-          <option value="SVG">SVG Vector Image</option>
-        </select>
-        <button onClick={this.handlePrint}>Export Chart</button>
+
+      <fieldset>
+        <legend>Scale Celsius</legend>
+        <input value={celsius} onChange={this.handleCelsius}/>
+      </fieldset>
+      <fieldset>
+        <legend>Scale Fahrenheit</legend>
+        <input value={fahrenheit} onChange={this.handleFahrenheit}/>
+      </fieldset>
+
       </div>
-    );
+    )
   }
 }
 
 ReactDOM.render(
-  <UIPrintChart/>,
+  <Calculator/>,
   document.getElementById('root')
 );
-
-
- export default UIPrintChart;
