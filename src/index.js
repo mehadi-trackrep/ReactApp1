@@ -55,4 +55,4 @@ ReactDOM.render(
 );
 
 
-// export default UIPrintChart;
+ export default UIPrintChart;
