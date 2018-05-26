@@ -1,19 +1,27 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+class IncrementApp extends React.Component{  // Class type of Component
+  constructor(props){
+    super(props);
+    this.state = {counter: 0}
+    this.increment = this.increment.bind(this)
+  }
 
-function Cartoon(props){ // 'Cartoon' is a Component .. Condition: First letter Capital hobe; 'props' is properties
-  return <h1>Hello, {props.name} on {props.place}</h1>  // here, name and place are the properties ..
+  increment(e){ // e means event
+    e.preventDefault(); // redirect prevention ..
+    this.setState({
+      counter: this.state.counter + 1
+    });
+  }
+
+  render(){
+    return <button href='https://google.com' onClick={this.increment}>Value is {this.state.counter}</button>
+  }
 }
 
-function Show(){ // another Component
-  return <div>
-              <Cartoon name='Mehadi' place='Uniliver 5th floor'/>
-              <Cartoon name='Motaher' place='Tafadar 5th floor'/>
-         </div>
-}
 
 ReactDOM.render(
-  <Show />, // Component gula ke evabe likhte hoy ..
+  <IncrementApp />,
   document.getElementById('root')
 );
